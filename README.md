@@ -5,12 +5,12 @@ The file run_analysis.R takes different files from de UCI HAR Dataset and transf
 ### 1. Merge training and test datasets, including labels for variables and levels
   
 The dataset consists of Train and Test data. Using the `read.table` command, the script loads different datasets into memory:  
--**subject_test** - loaded from the file "test/subject_test.txt"  
--**subject_train** - loaded from the file "train/subject_train.txt"  
--**x_test** - loaded from the file "test/X_test.txt"  
--**x_train** - loaded from the file "train/X_train.txt"  
--**y_test** - loaded from the file "test/y_test.txt"  
--**y_train** - loaded from the file "train/y_train.txt"  
+- **subject_test** - loaded from the file "test/subject_test.txt"  
+- **subject_train** - loaded from the file "train/subject_train.txt"  
+- **x_test** - loaded from the file "test/X_test.txt"  
+- **x_train** - loaded from the file "train/X_train.txt"  
+- **y_test** - loaded from the file "test/y_test.txt"  
+- **y_train** - loaded from the file "train/y_train.txt"  
 
 All of these datasets are transformed to `tbl_df` format for ease of use with dplyr later.
 
