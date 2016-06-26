@@ -17,20 +17,27 @@ train <- cbind(subject_train, y_train, x_train)
 dat <- tbl_df(rbind(train, test))
 
 # Include descriptive names of features in dataset
-features <- tbl_df(read.table("features.txt"))
-colnames(dat) <- c("Subject", "Activity", as.character(features$V2))
+features <- tbl_df(read.table("features.txt", colClasses = c("numeric", "character")))
+colnames(dat) <- c("Subject", "Activity", features$V2)
+
+# Include descriptive names for the levels in Activity
+
+labels <- tbl_df(read.table("activity_labels.txt", colClasses = "factor"))
+levels(dat$Activity) <- labels$V2
 
 # 2. Extracts only the measurements on the mean and standard deviation for each measurement.
 
-# dat_mean_sd <- select()
+dat_mean_sd <- dat[, grep("Subject|Activity|-mean\\(|-std\\(", names(dat))]
 
 # 3. Uses descriptive activity names to name the activities in the data set
 
+  # Already done in step 1.
 
 # 4. Appropriately labels the data set with descriptive variable names.
 
-# names
+  # Already done in step 1.
 
 # 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
-# summary
+dat_summary <- dat_mean_sd %>% group_by(Subject, Activity) %>% summarize_each(funs(mean))
+write.table(dat_summary, "Summary.txt", row.names = FALSE)
